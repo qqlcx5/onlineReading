@@ -60,14 +60,29 @@ export const constantRoutes = [
 export const asyncRoutes = [
   {
     path: '/book',
+    name: 'book',
     component: Layout,
     redirect: '/book/create',
+    meta: { title: '图书管理', icon: 'documentation' },
     children: [
       {
         path: '/book/create',
+        name: 'bookCreate',
         component: () => import('@/views/book/create'),
-        name: 'book',
-        meta: { title: '添加图书', icon: 'edit', roles: ['admin'] }
+        meta: { title: '添加图书', icon: 'edit' }
+      },
+      {
+        path: '/book/edit',
+        name: 'bookEdit',
+        hidden: true,
+        component: () => import('@/views/book/edit'),
+        meta: { title: '编辑图书', icon: 'edit', activeMenu: '/book/list ' }
+      },
+      {
+        path: '/book/list',
+        name: 'bookList',
+        component: () => import('@/views/book/list'),
+        meta: { title: '图书列表', icon: 'list' }
       }
     ]
   },
@@ -75,11 +90,12 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  })
 
 const router = createRouter()
 
