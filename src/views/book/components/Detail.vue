@@ -36,12 +36,19 @@ export default {
   data() {
     return {
       postForm: {},
-      rules: {},
-      showGuide: false,
+      rules: {
+        // title: [{ validator: validateRequire }],
+        // author: [{ validator: validateRequire }],
+        // language: [{ validator: validateRequire }],
+        // publisher: [{ validator: validateRequire }]
+      },
       loading: false
     }
   },
   methods: {
+    showGuide() {
+      console.log('显示帮助')
+    },
     submitForm() {}
   }
 }

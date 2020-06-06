@@ -3,12 +3,26 @@
     <el-upload
       :action="action"
       :headers="headers"
+      :multiple="false"
+      :limit="1"
+      :before-upload="beforeUpload"
+      :on-success="onSuccess"
+      :on-error="onError"
+      :on-remove="onRemove"
+      :file-list="fileList"
+      :on-exceed="onExceed"
+      :disabled="disabled"
+      drag
+      show-file-list
+      class="image-uploader"
+      accept="application/epub+zip"
     >
       <i class="el-icon-upload" />
       <div v-if="fileList.length === 0" class="el-upload__text">
-        请将电子书拖入或 <em>点击上传</em>
+        请将电子书拖入或
+        <em>点击上传</em>
       </div>
-      <div v-else class="el-upload__text">图书已上传</div>
+      <div v-else class="el-upload__text"> 图书已上传</div>
     </el-upload>
   </div>
 </template>
@@ -31,7 +45,7 @@ export default {
   },
   data() {
     return {
-      action: `${process.env.VUE_APP_BASE_API}/book/upload`
+      action: `${process.env.VUE_APP_BASE_API}book/upload`
     }
   },
   computed: {
